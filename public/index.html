@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Convertly — local file converter</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%235b8cff'/%3E%3Cpath d='M9 12h9l-3-3m3 3l-3 3M23 20h-9l3-3m-3 3l3 3' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="26" height="26"><rect width="32" height="32" rx="7" fill="#5b8cff"/><path d="M9 12h9l-3-3m3 3l-3 3M23 20h-9l3-3m-3 3l3 3" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      </span>
+      <div class="brand-text">
+        <h1>Convertly</h1>
+        <p>Local file converter &middot; nothing is stored</p>
+      </div>
+    </div>
+    <div class="topbar-note">Runs on your machine at <code>localhost</code></div>
+  </header>
+
+  <main class="container">
+    <section id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Upload files">
+      <div class="dz-inner">
+        <div class="dz-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="52" height="52"><path d="M24 32V12m0 0l-7 7m7-7l7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M8 30v4a4 4 0 004 4h24a4 4 0 004-4v-4" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
+        </div>
+        <p class="dz-title">Drop files here</p>
+        <p class="dz-sub">or click to browse &mdash; video, audio, images, documents, text, archives</p>
+      </div>
+      <input type="file" id="fileInput" multiple hidden />
+    </section>
+
+    <section class="link-card">
+      <label for="urlInput">Or paste a YouTube link</label>
+      <div class="link-row">
+        <input id="urlInput" type="url" placeholder="https://www.youtube.com/watch?v=…" autocomplete="off" spellcheck="false" />
+        <button id="urlBtn" class="btn" type="button">Add link</button>
+      </div>
+      <p class="link-hint">Downloads on this machine with yt-dlp, then converts like any other file.</p>
+    </section>
+
+    <section id="filesPanel" class="panel" hidden>
+      <div class="panel-head">
+        <h2>Files <span id="fileCount" class="count-badge"></span></h2>
+        <button id="clearBtn" class="btn ghost" type="button">Clear all</button>
+      </div>
+      <ul id="fileList" class="file-list"></ul>
+      <div class="panel-actions">
+        <button id="convertBtn" class="btn primary" type="button">Convert</button>
+        <span id="hint" class="hint"></span>
+      </div>
+    </section>
+
+    <section id="progressPanel" class="panel progress-panel" hidden>
+      <div class="progress-info">
+        <span id="progressLabel">Converting&hellip;</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+    </section>
+
+    <section id="resultsPanel" class="panel" hidden>
+      <div class="panel-head">
+        <h2>Result</h2>
+        <button id="downloadAllBtn" class="btn primary" type="button">Download</button>
+      </div>
+      <ul id="resultsList" class="results-list"></ul>
+      <div class="panel-actions">
+        <button id="convertMoreBtn" class="btn ghost" type="button">Convert more files</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+
+  <script type="module" src="/dist/app.js"></script>
+</body>
+</html>
